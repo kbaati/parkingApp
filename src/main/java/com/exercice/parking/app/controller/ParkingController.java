@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
+/**
+ * @author Kbaati
+ * notre controlleur
+ */
 @RestController
 @RequestMapping("/api/v1/parking")
 public class ParkingController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ParkingController.class);
-
 
     private final ParkingService parkingService;
 
@@ -27,12 +30,25 @@ public class ParkingController {
         this.parkingService = parkingService;
     }
 
+    //TODO ici je travail directement avec le model (Parking), il fallait passer par un DTO mais just pour gain de temps...
+
+    /**
+     * Récupérer la liste des parkings .
+     *
+     * @return une liste de Parking si trouvé
+     */
     @GetMapping("/list")
     public List<Parking> getAllParking() {
         LOGGER.debug("REST request to get parking liste");
         return parkingService.getListParking();
     }
+    //TODO ici je travail directement avec le model, il fallait passer par un DTO mais just pour gain de temps...
 
+    /**
+     * Récupérer la liste des disponibilité.
+     *
+     * @return une liste de disponibilité de Parking
+     */
     @GetMapping("/disponibility")
     public List<DisponibilityParking> getAllDispoParkingData() {
         LOGGER.debug("REST request to get parking dispo");
@@ -40,13 +56,26 @@ public class ParkingController {
     }
 
 
+
+    /**
+     * Récupérer les informations de stationnement.
+     *
+     * @param page
+     * @param pageSize
+     * @return une liste  d'information de Parking avec les nombre de place dispo avec pagination
+     */
     @GetMapping("pagination")
     public List<ParkingDTO> getParkingWithDisponibilityPagination(@RequestParam(defaultValue = "1") int page,
                                                                   @RequestParam(defaultValue = "5") int pageSize) {
         LOGGER.debug("REST request to get parking with dispo with pagination");
-        return parkingService.getParkingWithDisponibility(page,pageSize);
+        return parkingService.getParkingWithDisponibility(page, pageSize);
     }
 
+    /**
+     * Récupérer les informations de stationnement .
+     *
+     * @return une liste  d'information de Parking avec les nombre de place dispo
+     */
     @GetMapping("")
     public List<ParkingDTO> getParkingWithDisponibility() {
         LOGGER.debug("REST request to get parking dispo");
