@@ -1,0 +1,7 @@
+com.exercice.parking.app
+com.exercice.parking.app.controller
+com.exercice.parking.app.dto
+com.exercice.parking.app.exception
+com.exercice.parking.app.model
+com.exercice.parking.app.service
+com.exercice.parking.app.service.impl
